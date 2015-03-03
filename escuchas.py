@@ -11,7 +11,15 @@ urls = open('l.txt').readlines()
 #buckets = 5
 #length = len(urls)/buckets
 
-bucket = 0
+bucket = -1
+bucket_file = open('bucket.txt', 'r+')
+lines = bucket_file.readlines()
+if lines:
+  bucket = int(lines[0]) + 1
+bucket_file.seek(0)
+bucket_file.write(str(bucket))
+bucket_file.close()
+
 length = 1000
 
 start = bucket * length
@@ -38,4 +46,3 @@ for idx, url in enumerate(urls):
   except Exception as e:
     print ' failed'
     print e
-
